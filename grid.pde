@@ -29,8 +29,8 @@ class Grid {
         strokeWeight(1);
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                if ((getValue(j, i) == numbar.getChosen() + 1 && getValue(j, i) != 0))
-                        || (isNoteSet(j, i, numbar.getChosen()) && getValue(j, i) == 0)
+                if ((getValue(j, i) == numbar.getChosen() + 1 && getValue(j, i) != 0)
+                        || (isNoteSet(j, i, numbar.getChosen()) && getValue(j, i) == 0))
                     state = 0;
                 else if (isSet(j, i))
                     state = 1;
