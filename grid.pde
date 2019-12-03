@@ -7,15 +7,12 @@ class Grid {
 
     color[][] sqCols;
 
-    Grid(String[] gridStr) {
-        puzzleNum = int(random(gridStr.length));
-        println(puzzleNum);
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                vals[i][j] = gridStr[puzzleNum].charAt(i * 9 + j) - '0';
-                isSet[i][j] = (vals[i][j] != 0);
-            }
-        }
+    Grid(String[] gridStr, boolean regen) {
+        if (regen)
+            regeneratePuzzle(gridStr);
+        else
+            generatePuzzle(gridStr);
+
         sqCols = new color[][] {
             { #cacbef, #000000 },
             { #dcdfda, #221cea },
@@ -79,6 +76,50 @@ class Grid {
         } else {
             hovered.set(-1, -1);
         }
+    }
+
+    public void dump() {
+        String[] gridStr = new String[10];
+        for (int i = 0; i < 9; i++) {
+            gridStr[i] = "";
+            for (int j = 0; j < 9; j++) {
+                gridStr[i] += isSet[i][j] ? "x" : "";
+                gridStr[i] += str(vals[i][j]);
+                for (int k = 0; k < 9; k++)
+                    gridStr[i] += notes[i][j][k] ? str(k) : "";
+                gridStr[i] += ";";
+            }
+        }
+        gridStr[9] = str(puzzleNum);
+        saveStrings("save.txt", gridStr);
+    }
+
+    private void generatePuzzle(String[] gridStr) {
+        puzzleNum = int(random(gridStr.length));
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                vals[i][j] = gridStr[puzzleNum].charAt(i * 9 + j) - '0';
+                isSet[i][j] = (vals[i][j] != 0);
+            }
+        }
+    }
+
+    private void regeneratePuzzle(String[] gridStr) {
+        char c;
+        int n = 0;
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                if (gridStr[i].charAt(n) == 'x') {
+                    isSet[i][j] = true;
+                    ++n;
+                }
+                vals[i][j] = gridStr[i].charAt(n++) - '0';
+                while ((c = gridStr[i].charAt(n++)) != ';')
+                    notes[i][j][c - '0'] = true;
+            }
+            n = 0;
+        }
+        puzzleNum = Integer.parseInt(gridStr[9]);
     }
 
     private void drawNotes(int col, int row) {

@@ -7,9 +7,10 @@ boolean noteMode;
 void setup() {
 	size(800, 800);
 
-    String[] gridStr = loadStrings("puzzles.txt");
+    File f = new File(sketchPath("save.txt"));
+    String[] gridStr = loadStrings(f.exists() ? "save.txt" : "puzzles.txt");
+    grid = new Grid(gridStr, f.exists());
 
-    grid = new Grid(gridStr);
     numbar = new NumberBar();
     sqSize = (int) (height * .7);
 }
@@ -42,4 +43,6 @@ void keyPressed() {
         numbar.setChosen(new Integer(key - '1'));
     else if (key == ' ')
         noteMode = !noteMode;
+    else if (key == 's')
+        grid.dump();
 }
