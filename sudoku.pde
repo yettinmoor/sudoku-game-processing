@@ -6,7 +6,7 @@ int sqSize;
 boolean noteMode;
 
 void setup() {
-	size(800, 800);
+    size(800, 800);
 
     File f = new File(sketchPath("save.txt"));
     String[] gridStr = loadStrings(f.exists() ? "save.txt" : "puzzles.txt");
@@ -19,17 +19,17 @@ void setup() {
 }
 
 void draw() {
-	background(#66aacc);
+    background(#66aacc);
 
-	textAlign(LEFT, TOP);
+    textAlign(LEFT, TOP);
     textSize(20);
     text("Note mode " + ((noteMode) ? "on" : "off"), 10, 10);
     text("Puzzle #" + grid.puzzleNum, 10, 30);
 
     messenger.update();
 
-	textAlign(CENTER, CENTER);
-	translate((width - sqSize) / 2, (height - sqSize) * .3);
+    textAlign(CENTER, CENTER);
+    translate((width - sqSize) / 2, (height - sqSize) * .3);
 
     grid.drawSelf();
     numbar.drawSelf();
