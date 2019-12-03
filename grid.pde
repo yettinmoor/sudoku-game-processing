@@ -92,6 +92,7 @@ class Grid {
         }
         gridStr[9] = str(puzzleNum);
         saveStrings("save.txt", gridStr);
+        messenger.setMessage("Puzzle saved to save.txt.");
     }
 
     private void generatePuzzle(String[] gridStr) {

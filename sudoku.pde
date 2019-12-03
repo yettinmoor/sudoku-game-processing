@@ -1,5 +1,6 @@
 Grid grid;
 NumberBar numbar;
+Messenger messenger;
 
 int sqSize;
 boolean noteMode;
@@ -13,6 +14,8 @@ void setup() {
 
     numbar = new NumberBar();
     sqSize = (int) (height * .7);
+
+    messenger = new Messenger();
 }
 
 void draw() {
@@ -22,6 +25,8 @@ void draw() {
     textSize(20);
     text("Note mode " + ((noteMode) ? "on" : "off"), 10, 10);
     text("Puzzle #" + grid.puzzleNum, 10, 30);
+
+    messenger.update();
 
 	textAlign(CENTER, CENTER);
 	translate((width - sqSize) / 2, (height - sqSize) * .3);
