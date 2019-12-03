@@ -12,4 +12,4 @@ Press `s` to save puzzles in progress. Saved puzzles will be auto-loaded on star
 
 ## Puzzle source
 
-`puzzle.txt` was downloaded from <http://norvig.com/top95.txt>.
+`puzzles.txt` was downloaded from <http://norvig.com/top95.txt>.
